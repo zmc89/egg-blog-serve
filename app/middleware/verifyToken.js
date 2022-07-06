@@ -10,7 +10,7 @@ module.exports = () =>{
         // if ((await app.redis.exists(token)) === 1) {
         //   return ctx.helper.body.UNAUTHORIZED({ ctx });
         // }
-       await ctx.app.jwt.verify(token, ctx.app.config.jwt.secret);
-       await next();
+     await ctx.app.jwt.verify(token, ctx.app.config.jwt.secret);
+     await next();
     }
 }

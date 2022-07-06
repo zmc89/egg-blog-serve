@@ -5,6 +5,19 @@ const userVar = require('../validator/request/user')
 
 class UserController extends Controller {
   /**
+   * @description 获取图片验证码
+   */
+  async getCaptCha(){
+    const { ctx, service } = this;
+    const res = await ctx.helper.tools.verifyCode()
+    console.log(res)
+  }
+
+
+
+
+
+  /**
    * @description 登录
    */
   async login() {
@@ -40,6 +53,19 @@ class UserController extends Controller {
         ctx.helper.body.UNAUTHORIZED({ ctx });
         break;
     }
+  }
+   /**
+   * @description 获取用户信息
+   */
+  async userInfo(){
+    const { ctx, service,app } = this;
+    let token = await ctx.request.headers.authorization.split('Bearer ')[1]
+    const user = await app.jwt.verify(token,app.config.jwt.secret);
+    if(!user){
+      ctx.helper.body.UNAUTHORIZED({ctx})
+    }
+   const res = await service.user.userInfo(user.data)
+    ctx.helper.body.SUCCESS({ctx,res})
   }
 }
 

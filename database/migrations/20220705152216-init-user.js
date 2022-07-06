@@ -6,6 +6,7 @@ module.exports = {
     await queryInterface.createTable('user', {
       id: { type: INTEGER, primaryKey: true, autoIncrement: true, allowNull: false, },
       username: { type: STRING(16), allowNull: false, unique: true, comment: '用户名' },
+      nikeName:{type: STRING(64),comment:'昵称'},
       password: { type: STRING(255), allowNull: false, comment: '密码' },
       avatar: { type: STRING(255), comment: '密码' },
       phone: { type: STRING(20), comment: '手机号码', unique: true },

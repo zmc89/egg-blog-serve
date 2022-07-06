@@ -3,7 +3,7 @@ const Service = require('egg').Service;
 
 class UserService extends Service {
   async login(payload) {
-   const { ctx,app } = this;
+   const { ctx } = this;
    const user = await ctx.model.User.findOne({
         where: { username: payload.username },
       })
@@ -19,8 +19,17 @@ class UserService extends Service {
       }
      }
      const userInfo = {id:user.dataValues.id,username:user.dataValues.username}
-     const token = ctx.helper.tools.createToken(ctx,userInfo,app.config.jwt_exp)
+     const token = ctx.helper.tools.createToken(ctx,userInfo)
      return token
+  }
+
+  async userInfo(payload){
+    const { ctx } = this;
+    const user = await ctx.model.User.findOne({
+      where:{id:payload.id},
+      attributes: { exclude: ['password', 'deleted_at','username'] }
+    })
+    return user
   }
 }
 

@@ -6,6 +6,7 @@ module.exports = (app) => {
   const User = app.model.define('user', {
     id: { type: INTEGER, primaryKey: true, autoIncrement: true },
     username:{type: STRING(16), allowNull: false},
+    nikeName:{type: STRING(64),default:'新用户'},
     password: {type: STRING(255), allowNull: false},
     avatar:{type: STRING(255)},
     phone:{type: STRING(20)},
