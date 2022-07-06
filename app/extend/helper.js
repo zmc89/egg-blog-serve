@@ -1,3 +1,5 @@
+const bcrypt = require('bcrypt');
+
 module.exports.tools = {
     //生成token
     async createToken(ctx, params = {}, exp = 60, secret = ctx.app.config.jwt.secret) {
@@ -9,6 +11,17 @@ module.exports.tools = {
           secret
         );
       },
+      //密码加盐加密
+      async saltPwd(password){
+        const salt = bcrypt.genSaltSync(10);
+        const hash = bcrypt.hashSync(password, salt);
+        return hash
+      },
+      //密码验证
+      async verifyPassword(password,cryPwd){
+        return bcrypt.compare(password,cryPwd)
+      }
+
 }
 
 module.exports.body = {

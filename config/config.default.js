@@ -16,11 +16,12 @@ module.exports = appInfo => {
   config.keys = appInfo.name + '_1657030425573_7933';
 
   // add your middleware config here
-  config.middleware = [];
+  config.middleware = ['verifyToken'];
 
   // add your user config here
   const userConfig = {
     // myAppName: 'egg',
+    jwt_exp: 60 * 10, // jwt过期时间(秒)
   };
 
   config.sequelize = {
@@ -33,7 +34,7 @@ module.exports = appInfo => {
     timezone: '+08:00',
     define: {
       freezeTableName: true,
-      timestamps: false,
+      timestamps: true,
       paranoid: false,
       createdAt: 'created_at',
       updatedAt: 'updated_at',
