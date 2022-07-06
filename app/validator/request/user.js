@@ -37,6 +37,22 @@ module.exports = {
             min:4,
             description:"状态",
             default:true
+        },
+        captChaId:{
+            required:true,
+            type:'string',
+            max:255,
+            min:0,
+            allowEmpty: false,
+            description:"验证码Id"
+        },
+        code:{
+            required:true,
+            type:'string',
+            max:6,
+            min:6,
+            allowEmpty: false,
+            description:"验证码"
         }
     }
 }

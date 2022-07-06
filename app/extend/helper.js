@@ -29,13 +29,9 @@ module.exports.tools = {
       size:6,
       noise:3
     })
-    const data = {
-      captChId: uuidv4(),
-      path:res.data
-    }
-    console.log(res)
+    res.captChaId = uuidv4()
+    return res
   }
-
 }
 
 module.exports.body = {
