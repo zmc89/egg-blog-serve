@@ -8,7 +8,12 @@ class UserService extends Service {
   async verifyImgCode(id, code) {
     const { app } = this
     const verifycode = await app.redis.get(id)
-    if (verifycode != code) {
+    if(!verifycode){
+      return {
+        err_code:4004
+      }
+    }
+    if (verifycode.toLowerCase() != code) {
       return false
     } else {
       app.redis.del(id)
