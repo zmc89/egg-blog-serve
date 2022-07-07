@@ -15,4 +15,10 @@ module.exports = app => {
 
   //用户相关
   router.get('/api/user/userInfo',controller.user.userInfo)
+  router.put('/api/user/userInfo',controller.user.update)
+
+  //菜单相关
+  router.post('/api/menu/create',controller.menu.createMenu)
+  router.put('/api/menu/update',controller.menu.updateMenun)
+  router.delete('/api/menu/delete/:id',controller.menu.deleteMenu)
 };

@@ -16,28 +16,6 @@ module.exports = {
             allowEmpty: false,
             description:"密码"
         },
-        avatar:{
-            required:false,
-            type:'string',
-            max:255,
-            min:4,
-            description:"头像"
-        },
-        phone:{
-            required:false,
-            type:'string',
-            max:20,
-            min:4,
-            description:"手机号码"
-        },
-        status:{
-            required:false,
-            type:'boolean',
-            max:255,
-            min:4,
-            description:"状态",
-            default:true
-        },
         captChaId:{
             required:true,
             type:'string',

@@ -8,9 +8,9 @@ class UserService extends Service {
   async verifyImgCode(id, code) {
     const { app } = this
     const verifycode = await app.redis.get(id)
-    if(!verifycode){
+    if (!verifycode) {
       return {
-        err_code:4004
+        err_code: 4004
       }
     }
     if (verifycode.toLowerCase() != code) {
@@ -20,7 +20,9 @@ class UserService extends Service {
       return true
     }
   }
-
+  /**
+    * @description 登录
+    */
   async login(payload) {
     const { ctx } = this;
     const user = await ctx.model.User.findOne({
@@ -41,7 +43,9 @@ class UserService extends Service {
     const token = ctx.helper.tools.createToken(ctx, userInfo)
     return token
   }
-
+  /**
+  * @description 获取用户信息
+  */
   async userInfo(payload) {
     const { ctx } = this;
     const user = await ctx.model.User.findOne({
@@ -49,6 +53,21 @@ class UserService extends Service {
       attributes: { exclude: ['password', 'deleted_at', 'username'] }
     })
     return user
+  }
+  /**
+  * @description 更新用户信息
+  */
+  async update(payload) {
+    const { ctx } = this
+    return await ctx.model.User.update({
+      nikeName: payload.nikeName,
+      avatar: payload.avatar,
+      phone: payload.phone
+    }, {
+      where: {
+        id: payload.id
+      }
+    })
   }
 }
 
