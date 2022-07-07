@@ -25,5 +25,9 @@ module.exports = {
   security:{
     enable:true,
     package:'egg-security'
+  },
+  logger:{
+    enable:true,
+    package:'egg-logger'
   }
 };

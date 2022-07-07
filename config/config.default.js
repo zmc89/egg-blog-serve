@@ -16,7 +16,7 @@ module.exports = appInfo => {
   config.keys = appInfo.name + '_1657030425573_7933';
 
   // add your middleware config here
-  config.middleware = ['verifyToken'];
+  config.middleware = ['verifyToken','errorHandler'];
 
   // add your user config here
   const userConfig = {
@@ -65,6 +65,10 @@ module.exports = appInfo => {
       enable: false
     }
   }
+
+  config.logger = {
+    dir: '/path/to/your/custom/log/dir',
+  };
 
   config.redis = {
     client: {

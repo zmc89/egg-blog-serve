@@ -32,14 +32,11 @@ class UserController extends Controller {
     }
     ctx.validate(params, ctx.request.body)
    const resCode = await service.user.verifyImgCode(ctx.request.body.captChaId,ctx.request.body.code)
-   console.log(resCode)
    if(resCode.err_code){
-     ctx.helper.body.INVALID_REQUEST({ ctx, code: 4004, msg: '验证码失效' });
-     return
+    return ctx.helper.body.INVALID_REQUEST({ ctx, code: 4004, msg: '验证码失效' });
    }
    if(!resCode){
-    ctx.helper.body.INVALID_REQUEST({ ctx, code: 4000, msg: '验证码错误' });
-    return
+    return  ctx.helper.body.INVALID_REQUEST({ ctx, code: 4000, msg: '验证码错误' });
    }
     const res = await service.user.login(ctx.request.body)
     switch (res.err_code) {
@@ -76,7 +73,7 @@ class UserController extends Controller {
     let token = await ctx.request.headers.authorization.split('Bearer ')[1]
     const user = await app.jwt.verify(token, app.config.jwt.secret);
     if (!user) {
-      ctx.helper.body.UNAUTHORIZED({ ctx })
+      return ctx.helper.body.UNAUTHORIZED({ ctx })
     }
     const res = await service.user.userInfo(user.data)
     ctx.helper.body.SUCCESS({ ctx, res })
