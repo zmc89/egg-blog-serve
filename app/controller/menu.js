@@ -11,7 +11,7 @@ class MenuController extends Controller {
         const { ctx, service } = this;
         ctx.validate(menuVar.menu, ctx.request.body)
         await service.menu.create(ctx.request.body)
-        ctx.helper.body.CREATED_UPDATE({ ctx, msg: '创建成功' });
+         ctx.helper.body.CREATED_UPDATE({ ctx, msg: '创建成功' });
     }
       /**
      * @description 更新菜单
