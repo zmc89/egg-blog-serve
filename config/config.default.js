@@ -66,10 +66,6 @@ module.exports = appInfo => {
     }
   }
 
-  config.logger = {
-    dir: '/path/to/your/custom/log/dir',
-  };
-
   config.redis = {
     client: {
       port: 6379,          // Redis port
